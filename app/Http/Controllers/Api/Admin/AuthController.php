@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Admin\Base\BaseController as BaseController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Validator;
 
@@ -12,12 +11,6 @@ use App\Admin;
 
 class AuthController extends BaseController
 {
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function register(Request $request)
     {
         $data = $request->all();

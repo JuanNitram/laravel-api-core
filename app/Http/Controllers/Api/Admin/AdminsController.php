@@ -22,7 +22,6 @@ class AdminsController extends BaseController
      */
     public function __construct(AdminsService $adminsService)
     {
-        parent::__construct(Admin::class, 'Admins');
         $this->adminsService = $adminsService;
     }
 
