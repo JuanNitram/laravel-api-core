@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Services\CategoriesService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Admin\Base\BaseController as BaseController;
 use App\Models\Categories;
@@ -11,41 +12,42 @@ use Validator;
 
 class CategoriesController extends BaseController
 {
-    public function __construct()
+
+    /**
+     * @var CategoriesService
+     */
+    private $service;
+
+    /**
+     * CategoriesController constructor.
+     * @var CategoriesService $service
+     */
+    public function __construct(CategoriesService $service)
     {
-        parent::__construct(Categories::class, 'Categories');
+        $this->service = $service;
     }
 
     public function categories()
     {
-        $categories = Categories::orderBy('pos', 'asc')->get();
-
-        if(count($categories) > 0){
-            $success['categories'] = $categories;
-            return $this->sendResponse($success, 'Categories');
-        }
-
-        return $this->sendError('No registered categories.', [], 200);
+        return $this->sendResponse(['categories' => $this->service->all()], 'Categories');
     }
 
     public function search($id)
     {
-        $category = Categories::where('id', $id)->first();
-        if($category){
-            $success['category'] = $category;
-            return $this->sendResponse($success, 'Category');
+        if($category = $this->service->get($id)){
+            return $this->sendResponse(['category' => $category], 'Category founded successfully.');
         }
-        return $this->sendError('Category not found.', [], 200);
+
+        return $this->sendResponse([], 'Category not found.');
     }
 
     public function remove($id)
     {
-        $category = Categories::where('id', $id)->first();
-        if($category){
-            $category->delete();
-            return $this->sendResponse([], 'Success');
+        if($removed = $this->service->remove($id)){
+            return $this->sendResponse([], 'Category deleted successfully.');
         }
-        return $this->sendError('Category not found.', [], 200);
+
+        return $this->sendResponse([], 'A problem was ocurred.');
     }
 
     public function save(Request $request)
@@ -60,18 +62,18 @@ class CategoriesController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors(), 200);
         }
 
-        $category = Categories::create($data);
+        $result = $this->service->save($request->all());
+        if($result['success'] === true){
+            return $this->sendResponse($result['data'], $result['message']);
+        }
 
-        $success['category'] = $category;
-
-        return $this->sendResponse($success, 'Category registered successfully.');
+        return $this->sendResponse([], $result['message']);
     }
 
     public function update($id, Request $request)
     {
-        $category = Categories::where('id', $id)->first();
-
         $data = $request->all();
+
         $validator = Validator::make($data, [
             'name' => 'required',
         ]);
@@ -80,18 +82,12 @@ class CategoriesController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors(), 200);
         }
 
-        if($category){
-            $category->update($data);
-
-            if(isset($data['medias'])){
-                $this->store_medias($category, $data['medias']);
-            }
-
-            $success['category'] = $category;
-
-            return $this->sendResponse($success, 'Category register successfully.');
+        $result = $this->service->update($id, $data);
+        if($result['success'] === true){
+            return $this->sendResponse($result['data'], $result['message']);
         }
-        return $this->sendError('The category doesnt exists.', $validator->errors(), 200);
+
+        return $this->sendResponse([], $result['message']);
     }
 
 }

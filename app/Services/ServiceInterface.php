@@ -5,7 +5,6 @@ namespace App\Services;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use phpDocumentor\Reflection\Types\Boolean;
 
 interface ServiceInterface
 {
@@ -15,26 +14,26 @@ interface ServiceInterface
     public function all(): Collection;
 
     /**
-     * @param int $id
+     * @var int $id
      * @return Model
      */
     public function get(int $id): ?Model;
 
     /**
-     * @param int $id
+     * @var int $id
      * @return bool
      */
-    public function remove(int $id): Boolean;
+    public function remove(int $id): bool;
 
     /**
-     * @param array $data
+     * @var array $data
      * @return array
      */
     public function save(array $data = []): array;
 
     /**
-     * @param int   $id
-     * @param array $data
+     * @var int   $id
+     * @var array $data
      * @return array
      */
     public function update(int $id, array $data = []): array;

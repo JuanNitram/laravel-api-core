@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use phpDocumentor\Reflection\Types\Boolean;
 use App\Models\Sliders;
 
-class SlidersService implements ServiceInterface
+class SlidersService
 {
     /**
      * @var MediasService $mediasService
