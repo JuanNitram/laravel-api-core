@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Services\SubcategoriesService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Admin\Base\BaseController as BaseController;
-use Illuminate\Support\Facades\Storage;
 
 use Validator;
 
@@ -12,54 +12,62 @@ use App\Models\Subcategories;
 
 class SubcategoriesController extends BaseController
 {
+
+    /**
+     * @var SubcategoriesService
+     */
+    private $service;
+
+    /**
+     * SubcategoriesController constructor.
+     * @param SubcategoriesService $service
+     */
+    public function __construct(SubcategoriesService $service)
+    {
+        $this->service = $service;
+    }
+
     /**
     * Register api
     *
     * @return \Illuminate\Http\Response
     */
 
-    public function subcategories(Request $request){
-        $category = $request->categories;
+    public function subcategories(Request $request)
+    {
+        $categoryId = $request->categories;
 
-        if($category){
-            $subcategories = Subcategories::where('categories_id', $category)->get();
-
-            if(count($subcategories) > 0){
-                $success['subcategories'] = $subcategories;
-                return $this->sendResponse($success, 'Subcategories');
-            }
-
-            return $this->sendError('No registered subcategories.', [], 200);
-        }
-        $subcategories = Subcategories::orderBy('pos', 'asc')->with('categories')->get();
-
-        if(count($subcategories) > 0){
-            $success['subcategories'] = $subcategories;
-            return $this->sendResponse($success, 'Subcategories');
+        if($categoryId !== null){
+            return $this->sendResponse([
+                'subcategories' => $this->service->get($categoryId)
+            ],'Subcategories');
         }
 
-        return $this->sendError('No registered subcategories.', [], 200);
+        return $this->sendResponse([
+            'subcategories' => $this->service->all()
+        ], 'Subcategories');
     }
 
-    public function search($id){
-        $subcategory = Subcategories::where('id', $id)->first();
-        if($subcategory){
-            $success['subcategory'] = $subcategory;
-            return $this->sendResponse($success, 'Subcategory');
+    public function search($id)
+    {
+        if($subcategory = $this->service->get($id)){
+            return $this->sendResponse(['subcategory' => $subcategory], 'Subcategory founded successfully.');
         }
-        return $this->sendError('Subcategory not found.', [], 200);
+
+        return $this->sendResponse([], 'Subcategory not found.');
     }
 
-    public function remove($id){
-        $subcategory = Subcategories::where('id', $id)->first();
-        if($subcategory){
-            $subcategory->delete();
-            return $this->sendResponse([], 'Success');
+    public function remove($id)
+    {
+        if($removed = $this->service->remove($id)){
+            return $this->sendResponse([], 'Subcategory deleted successfully.');
         }
-        return $this->sendError('Subcategory not found.', [], 200);
+
+        return $this->sendResponse([], 'A problem was ocurred.');
     }
 
-    public function save(Request $request){
+    public function save(Request $request)
+    {
         $data = $request->all();
 
         $validator = Validator::make($data, [
@@ -71,38 +79,33 @@ class SubcategoriesController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors(), 200);
         }
 
-        $subcategory = Subcategories::create($data);
+        $result = $this->service->save($request->all());
+        if($result['success'] === true){
+            return $this->sendResponse($result['data'], $result['message']);
+        }
 
-        $success['subcategory'] = $subcategory;
-
-        return $this->sendResponse($success, 'Subcategory registered successfully.');
+        return $this->sendResponse([], $result['message']);
     }
 
-    public function update($id, Request $request){
-        $subcategory = Subcategories::where('id', $id)->first();
-        if($subcategory){
-            $data = $request->all();
+    public function update($id, Request $request)
+    {
+        $data = $request->all();
 
-            $validator = Validator::make($data, [
-                'name' => 'required',
-                'categories_id' => 'required'
-            ]);
+        $validator = Validator::make($data, [
+            'name' => 'required',
+            'categories_id' => 'required'
+        ]);
 
-            if($validator->fails()){
-                return $this->sendError('Validation Error.', $validator->errors(), 200);
-            }
-
-            $subcategory->update($data);
-
-            if(isset($data['medias'])){
-                $this->store_medias($category, $data['medias']);
-            }
-
-            $success['subcategory'] = $subcategory;
-
-            return $this->sendResponse($success, 'Subcategory register successfully.');
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), 200);
         }
-        return $this->sendError('The subcategory doesnt exists.', $validator->errors(), 200);
+
+        $result = $this->service->update($id, $data);
+        if($result['success'] === true){
+            return $this->sendResponse($result['data'], $result['message']);
+        }
+
+        return $this->sendResponse([], $result['message']);
     }
 
 }

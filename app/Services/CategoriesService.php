@@ -64,8 +64,6 @@ class CategoriesService
     {
         $category = $this->model->create($data);
 
-        $success['category'] = $category;
-
         return [
             'success' => true,
             'data' => [

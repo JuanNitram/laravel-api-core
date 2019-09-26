@@ -11,17 +11,24 @@ use Illuminate\Support\Collection;
 class SubcategoriesService
 {
     /**
-     * @var Categories
+     * @var Subcategories
      */
     private $model;
 
     /**
-     * CategoriesService constructor.
-     * @var Subcategories $model
+     * @var CategoriesService
      */
-    public function __construct(Subcategories $model)
+    private $categoriesService;
+
+    /**
+     * SubcategoriesService constructor.
+     * @var Subcategories       $model
+     * @param CategoriesService $categoriesService
+     */
+    public function __construct(Subcategories $model, CategoriesService $categoriesService)
     {
         $this->model = $model;
+        $this->categoriesService = $categoriesService;
     }
 
     /**
@@ -29,7 +36,7 @@ class SubcategoriesService
      */
     public function all(): Collection
     {
-        // TODO: Implement all() method.
+        return $this->model->all();
     }
 
     /**
@@ -38,7 +45,7 @@ class SubcategoriesService
      */
     public function get(int $id): ?Model
     {
-        // TODO: Implement get() method.
+        return $this->model->where('id', $id)->first();
     }
 
     /**
@@ -47,7 +54,11 @@ class SubcategoriesService
      */
     public function remove(int $id): bool
     {
-        // TODO: Implement remove() method.
+        if($subcategory = $this->model->where('id', $id)->first()){
+            return $subcategory->delete();
+        }
+
+        return false;
     }
 
     /**
@@ -56,16 +67,53 @@ class SubcategoriesService
      */
     public function save(array $data = []): array
     {
-        // TODO: Implement save() method.
+        if(($category = $this->categoriesService->get($data['categories_id']) !== null)){
+            $subcategory = $this->model->create($data);
+
+            return [
+                'success' => true,
+                'data' => [
+                    'subcategory' => $subcategory
+                ],
+                'message' => 'Subcategory register successfully.'
+            ];
+        }
+
+        return [
+            'success' => false,
+            'message' => 'Category not found.'
+        ];
     }
 
     /**
      * @return array
-     * @var array $data
      * @var int   $id
+     * @var array $data
      */
     public function update(int $id, array $data = []): array
     {
-        // TODO: Implement update() method.
+        if($subcategory = $this->model->where('id', $id)->first()){
+            if(isset($data['categories_id']) !== null && $this->categoriesService->get($data['categories_id']) === null){
+                return [
+                    'success' => false,
+                    'message' => 'Category not found.'
+                ];
+            }
+
+            $subcategory->update($data);
+
+            return [
+                'success' => true,
+                'data' => [
+                    'subcategory' => $subcategory
+                ],
+                'message' => 'Subcategory updated successfully.'
+            ];
+        }
+
+        return [
+            'success' => false,
+            'message' => 'Subcategory not found.'
+        ];
     }
 }
