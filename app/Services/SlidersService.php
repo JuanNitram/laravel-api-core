@@ -82,7 +82,7 @@ class SlidersService
     {
         $slider = Sliders::create($data);
 
-        if(isset($data['medias'])){
+        if(isset($data['medias']) === true){
             $this->mediasService->storeMedias($slider, $data['medias']);
         }
 

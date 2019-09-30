@@ -13,20 +13,56 @@ use phpDocumentor\Reflection\Types\Boolean;
 class AdminsService {
 
     /**
+     * @var Admin
+     */
+    private $model;
+
+    /**
+     * @var AdminsTypes
+     */
+    private $adminsTypes;
+
+    /**
+     * @var SectionsService
+     */
+    private $sectionsService;
+
+    public function __construct(Admin $model, AdminsTypes $adminsTypes, SectionsService $sectionsService)
+    {
+        $this->model = $model;
+        $this->adminsTypes = $adminsTypes;
+        $this->sectionsService = $sectionsService;
+    }
+
+    /**
      * @return Collection
      */
     public function all(): Collection
     {
-        return Admin::with('sections')->get();
+        return $this->model->with('sections')->get();
     }
 
     /**
      * @param int $id
-     * @return Model|null
+     * @return Admin
      */
-    public function get(int $id): ?Model
+    public function get(int $id): Admin
     {
-        return Admin::where('id', $id)->with('sections')->first();
+        return $this->model->where('id', $id)->with('sections')->first();
+    }
+
+    public function getByEmail(string $email): Admin
+    {
+        return $this->model->where('email', $email)->with('sections')->first();
+    }
+
+    /**
+     * @param Admin $admin
+     * @return Collection
+     */
+    public function getAdminSections(Admin $admin): Collection
+    {
+        return $admin->sections;
     }
 
     /**
@@ -35,7 +71,7 @@ class AdminsService {
      */
     public function remove(int $id): Boolean
     {
-        if($admin = Admin::where('id', $id)->first()){
+        if($admin = $this->model->where('id', $id)->first()){
             return $admin->delete();
         }
 
@@ -48,10 +84,10 @@ class AdminsService {
      */
     public function save(array $data = []): array
     {
-        if($parent = Admin::where('email', $data['parent'])->first()){
-            if($admin_type = AdminsTypes::where('id', $data['types_id'])->first()){
+        if($parent = $this->model->where('email', $data['parent'])->first()){
+            if($admin_type = $this->adminsTypes->where('id', $data['types_id'])->first()){
                 $sections_attach = [];
-                $sections = Sections::all();
+                $sections = $this->sectionsService->all();
 
                 if($parent->types_id == 1){ // The parent is SuperAdmin, then set all sections to new Admin
                     if($data['types_id'] > 1){
@@ -89,7 +125,7 @@ class AdminsService {
                 }
 
                 $data['password'] = Hash::make($data['password']);
-                $admin = Admin::create($data);
+                $admin = $this->model->create($data);
                 $admin->sections()->attach($sections_attach);
 
                 return [
@@ -118,7 +154,7 @@ class AdminsService {
      */
     public function update(int $id, array $data = []): array
     {
-        if($admin = Admin::where('id', $id)->first()){
+        if($admin = $this->model->where('id', $id)->first()){
             $data['password'] = Hash::make($data['password']);
 
             $admin->update($data);

@@ -8,8 +8,6 @@ use App\Http\Controllers\Api\Admin\Base\BaseController as BaseController;
 
 use Validator;
 
-use App\Models\Subcategories;
-
 class SubcategoriesController extends BaseController
 {
 

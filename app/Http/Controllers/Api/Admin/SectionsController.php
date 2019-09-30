@@ -2,40 +2,61 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Services\AdminsService;
+use App\Services\SectionsService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Admin\Base\BaseController as BaseController;
 use Validator;
 
-use App\Admin;
 use App\Models\Sections;
 
 class SectionsController extends BaseController
 {
-    public function sections(Request $request){
-        $parent = $request->parent;
 
-        if($parent){
-            $admin = Admin::where('email', $parent)->first();
-            if($admin){
-                $sections = $admin->sections;
-                if(count($sections) > 0){
-                    $success['sections'] = $sections;
-                    return $this->sendResponse($success, 'sections');
-                }
-                return $this->sendError('No registered sections.', [], 200);
-            }
-            return $this->sendError('No registered admin.', [], 200);
-        }
+    /**
+     * @var SectionsService
+     */
+    private $service;
 
-        return $this->sendError('No param parent founded.', [], 200);
+    /**
+     * @var AdminsService
+     */
+    private $adminsService;
+
+    /**
+     * SectionsController constructor.
+     * @param AdminsService $adminsService
+     */
+    public function __construct(SectionsService $service, AdminsService $adminsService)
+    {
+        $this->service = $service;
+        $this->adminsService = $adminsService;
     }
 
-    public function search($id){
-        $section = Sections::where('id', $id)->first();
-        if($section){
-            $success['section'] = $section;
-            return $this->sendResponse($success, 'Section');
+    public function sections(Request $request)
+    {
+        $parent = $request->parent;
+
+        if($parent !== null){
+            $admin = $this->adminsService->getByEmail($parent);
+            if($admin !== null){
+                return $this->sendResponse([
+                    'sections' => $this->adminsService->getAdminSections($admin)
+                ],'Sections');
+            }
+
+            return $this->sendResponse([], 'Admin not found.');
         }
-        return $this->sendError('Section not found.', [], 200);
+
+        return $this->sendResponse([], 'No param parent founded.');
+    }
+
+    public function search($id)
+    {
+        if($section = $this->service->get($id)){
+            return $this->sendResponse(['section' => $section], 'Section founded successfully.');
+        }
+
+        return $this->sendResponse([], 'Section not found.');
     }
 }

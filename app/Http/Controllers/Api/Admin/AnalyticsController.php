@@ -17,9 +17,6 @@ class AnalyticsController extends BaseController
     }
 
     public function fetch(Request $request){
-        // $startDate = Carbon::now()->subYear();
-        // $endDate = Carbon::now();
-        // $metrics = 'ga:sessions,ga:pageviews,ga:sessionDuration';
         $data = Analytics::fetchTotalVisitorsAndPageViews(Period::days(30));
 
         if($data){

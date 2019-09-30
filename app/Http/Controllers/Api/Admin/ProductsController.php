@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Services\ProductsService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Admin\Base\BaseController as BaseController;
 use App\Models\Products;
@@ -12,45 +13,41 @@ use Validator;
 
 class ProductsController extends BaseController
 {
+    /**
+     * @var ProductsService
+     */
+    private $service;
 
-    public function __construct()
+    /**
+     * ProductsController constructor.
+     * @param ProductsService $service
+     */
+    public function __construct(ProductsService $service)
     {
-        parent::__construct(Products::class, 'Products');
+        $this->service = $service;
     }
 
     public function products()
     {
-        $products = Products::orderBy('pos', 'asc')->get();
-
-        if(count($products) > 0){
-            $success['products'] = $products;
-            return $this->sendResponse($success, 'Products');
-        }
-
-        return $this->sendError('No registered products.', [], 200);
+        return $this->sendResponse(['products' => $this->service->all()], 'Products');
     }
 
     public function search($id)
     {
-        $product = Products::where('id', $id)->with('subcategories')->first();
-
-        if($product){
-            $success['product'] = $product;
-            return $this->sendResponse($success, 'Product');
+        if($product = $this->service->get($id)){
+            return $this->sendResponse(['product' => $product], 'Product founded successfully.');
         }
-        return $this->sendError('Product not found.', [], 200);
+
+        return $this->sendResponse([], 'Product not found.');
     }
 
     public function remove($id)
     {
-        $product = Products::with('media')->where('id', $id)->first();
-        if($product){
-            foreach($product->media as $media)
-                $media->delete();
-            $product->delete();
-            return $this->sendResponse([], 'Success');
+        if($removed = $this->service->remove($id)){
+            return $this->sendResponse([], 'Product deleted successfully.');
         }
-        return $this->sendError('Product not found.', [], 200);
+
+        return $this->sendResponse([], 'A problem was ocurred.', false);
     }
 
     public function save(Request $request)
@@ -66,102 +63,33 @@ class ProductsController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors(), 200);
         }
 
-        $category = Categories::where('id', $data['categories_id'])
-            ->with('subcategories')->first();
-
-        if($category){
-            $product = Products::create($data);
-
-            if(isset($data['medias'])){
-                $this->store_medias($product, $data['medias']);
-            }
-
-            if(isset($data['subcategories'])){
-                if(count($category->subcategories)){
-                    foreach($data['subcategories'] as $data_sub){
-                        $exist = false;
-                        foreach($category->subcategories as $sub){
-                            if($data_sub == $sub->id){
-                                $exists = true;
-                                break;
-                            }
-                        }
-                    }
-
-                    if(!$exists){
-                        return $this->sendError('There is a invalid subcategory.', [], 200);
-                    }
-
-                    $product->subcategories()->attach($data['subcategories']);
-                }
-            }
-
-            $success['product'] = $product;
-
-            return $this->sendResponse($success, 'Product register successfully.');
+        $result = $this->service->save($data);
+        if($result['success'] === true){
+            return $this->sendResponse($result['data'], $result['message']);
         }
 
-        return $this->sendError('The category doesnt exists.', [], 200);
+        return $this->sendResponse([], $result['message']);
     }
 
     public function update($id, Request $request)
     {
-        $product = Products::where('id', $id)->first();
-        if($product){
-            $data = $request->all();
+        $data = $request->all();
 
-            $validator = Validator::make($data, [
-                'name' => 'required',
-                'categories_id' => 'required'
-            ]);
+        $validator = Validator::make($data, [
+            'name' => 'required',
+            'categories_id' => 'required'
+        ]);
 
-            if($validator->fails()){
-                return $this->sendError('Validation Error.', $validator->errors(), 200);
-            }
-
-            $category = Categories::where('id', $data['categories_id'])
-                ->with('subcategories')->first();
-
-            if($category){
-                $product->update($data);
-
-                if(isset($data['medias'])){
-                    $this->store_medias($product, $data['medias']);
-                }
-
-                if(isset($data['subcategories'])){
-
-                    if(count($category->subcategories)){
-                        foreach($data['subcategories'] as $data_sub){
-                            $exist = false;
-                            foreach($category->subcategories as $sub){
-                                if($data_sub == $sub->id){
-                                    $exist = true;
-                                    break;
-                                }
-                            }
-                        }
-
-                        if(!$exist){
-                            return $this->sendError('There is a invalid subcategory.', [], 200);
-                        }
-
-                        $product->subcategories()->detach();
-                        $product->subcategories()->attach($data['subcategories']);
-                    }
-                } else {
-                    $product->subcategories()->detach();
-                    $product->subcategories()->attach([]);
-                }
-
-                $success['product'] = $product;
-
-                return $this->sendResponse($success, 'Product register successfully.');
-            }
-
-            return $this->sendError('The category doesnt exists.', [], 200);
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), 200);
         }
-        return $this->sendError('The product doesnt exists.', [], 200);
+
+        $result = $this->service->update($id, $data);
+        if($result['success'] === true){
+            return $this->sendResponse($result['data'], $result['message']);
+        }
+
+        return $this->sendResponse([], $result['message']);
     }
 
 }
