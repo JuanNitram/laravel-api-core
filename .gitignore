@@ -11,6 +11,9 @@ app/storage/
 public/storage
 public/hot
 storage/*.key
+storage/app/public/images
+storage/app/public/others
+storage/app/public/videos
 .env.*.php
 .env.php
 .env
