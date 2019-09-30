@@ -11,10 +11,6 @@ use Validator;
 
 class AnalyticsController extends BaseController
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     public function fetch(Request $request){
         $data = Analytics::fetchTotalVisitorsAndPageViews(Period::days(30));

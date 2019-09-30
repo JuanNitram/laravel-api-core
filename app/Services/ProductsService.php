@@ -37,20 +37,22 @@ class ProductsService
     }
 
     /**
+     * @param array $relations
      * @return Collection
      */
-    public function all(): Collection
+    public function all(array $relations = []): Collection
     {
-        return $this->model->orderBy('pos', 'asc')->get();
+        return $this->model->with($relations)->orderBy('pos', 'asc')->get();
     }
 
     /**
-     * @var int $id
+     * @param array $relations
      * @return Products
+     * @var int     $id
      */
-    public function get(int $id): Products
+    public function get(int $id, array $relations = []): Products
     {
-        return $this->model->where('id', $id)->first();
+        return $this->model->with($relations)->where('id', $id)->first();
     }
 
     /**

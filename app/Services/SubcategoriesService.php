@@ -32,20 +32,26 @@ class SubcategoriesService
     }
 
     /**
+     * @param array $relations
      * @return Collection
      */
-    public function all(): Collection
+    public function all(array $relations = []): Collection
     {
-        return $this->model->all();
+        return $this->model->with($relations)->get();
     }
 
     /**
-     * @return Model
+     * @return Subcategories
      * @var int $id
      */
-    public function get(int $id): ?Model
+    public function get(int $id): Subcategories
     {
         return $this->model->where('id', $id)->first();
+    }
+
+    public function getByCategory(int $id): Collection
+    {
+        return $this->model->where('categories_id', $id)->get();
     }
 
     /**

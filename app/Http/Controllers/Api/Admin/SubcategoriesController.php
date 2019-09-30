@@ -25,24 +25,18 @@ class SubcategoriesController extends BaseController
         $this->service = $service;
     }
 
-    /**
-    * Register api
-    *
-    * @return \Illuminate\Http\Response
-    */
-
     public function subcategories(Request $request)
     {
         $categoryId = $request->categories;
 
         if($categoryId !== null){
             return $this->sendResponse([
-                'subcategories' => $this->service->get($categoryId)
+                'subcategories' => $this->service->getByCategory($categoryId)
             ],'Subcategories');
         }
 
         return $this->sendResponse([
-            'subcategories' => $this->service->all()
+            'subcategories' => $this->service->all(['categories'])
         ], 'Subcategories');
     }
 

@@ -34,7 +34,7 @@ class ProductsController extends BaseController
 
     public function search($id)
     {
-        if($product = $this->service->get($id)){
+        if($product = $this->service->get($id, ['subcategories'])){
             return $this->sendResponse(['product' => $product], 'Product founded successfully.');
         }
 

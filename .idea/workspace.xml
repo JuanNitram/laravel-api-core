@@ -2,9 +2,68 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7b123bb-8c0b-4f13-9115-835240e2bce6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/AnalyticsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/AnalyticsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/ProductsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/ProductsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/SlidersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/SlidersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/SubcategoriesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/SubcategoriesController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Services/ProductsService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/ProductsService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/SubcategoriesService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/SubcategoriesService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/AdminsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/AdminsTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-icon-1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-icon-2.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-icon-3.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-icon-4.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-icon-5.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-icon-6.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-icon-7.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-icon-8.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-icon-9.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-icon.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-large-1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-large-2.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-large-3.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-large-4.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-large-5.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-large-6.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-large-7.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-large-8.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-large-9.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-large.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-normal-1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-normal-2.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-normal-3.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-normal-4.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-normal-5.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-normal-6.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-normal-7.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-normal-8.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-normal-9.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-normal.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-original-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-original-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-original-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-original-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-original-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-original-6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-original-7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-original-8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-original-9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-original.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-thumb-1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-thumb-2.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-thumb-3.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-thumb-4.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-thumb-5.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-thumb-6.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-thumb-7.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-thumb-8.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-thumb-9.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/361980_800x600_crop_5a0c3e17801fa-thumb.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/39887114_10212935804293359_7058517251892183040_n (1)-icon.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/39887114_10212935804293359_7058517251892183040_n (1)-large.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/39887114_10212935804293359_7058517251892183040_n (1)-normal.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/39887114_10212935804293359_7058517251892183040_n (1)-original.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/images/39887114_10212935804293359_7058517251892183040_n (1)-thumb.jpeg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,7 +83,7 @@
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
-              <caret line="11" column="10" lean-forward="true" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+              <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -32,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Services/ProductsService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="75" column="5" lean-forward="true" selection-start-line="75" selection-start-column="5" selection-end-line="75" selection-end-column="5" />
+            <state relative-caret-position="125">
+              <caret line="159" column="45" lean-forward="true" selection-start-line="159" selection-start-column="45" selection-end-line="159" selection-end-column="45" />
               <folding>
                 <element signature="e#34#58#0#PHP" expanded="true" />
               </folding>
@@ -42,10 +101,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/seeds/AdminsTableSeeder.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/ProductsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="662">
-              <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
+            <state relative-caret-position="332">
+              <caret line="36" column="67" selection-start-line="36" selection-start-column="67" selection-end-line="36" selection-end-column="67" />
               <folding>
                 <element signature="e#50#83#0#PHP" expanded="true" />
               </folding>
@@ -53,11 +121,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/SlidersController.php">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Services/SubcategoriesService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="132" column="70" selection-start-line="132" selection-start-column="70" selection-end-line="132" selection-end-column="70" />
+            <state relative-caret-position="318">
+              <caret line="54" column="5" lean-forward="true" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
+              <folding>
+                <element signature="e#34#63#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -65,11 +136,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Services/SlidersService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="61" selection-start-line="61" selection-end-line="74" selection-end-column="5" />
+            <state relative-caret-position="141">
+              <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
               <folding>
                 <element signature="e#32#71#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Services/SectionsService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+              <folding>
+                <element signature="e#34#58#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/SubcategoriesController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -87,18 +179,19 @@
         <option value="$PROJECT_DIR$/app/Services/ServiceInterface.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/CategoriesController.php" />
         <option value="$PROJECT_DIR$/app/Services/CategoriesService.php" />
-        <option value="$PROJECT_DIR$/app/Services/SubcategoriesService.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/SectionsController.php" />
         <option value="$PROJECT_DIR$/app/Services/SectionsService.php" />
         <option value="$PROJECT_DIR$/app/Services/SlidersService.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/Base/BaseController.php" />
         <option value="$PROJECT_DIR$/app/Services/AdminsService.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/SubcategoriesController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/AnalyticsController.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/app/Services/ProductsService.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/ProductsController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/SlidersController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/AnalyticsController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/ProductsController.php" />
+        <option value="$PROJECT_DIR$/app/Services/ProductsService.php" />
+        <option value="$PROJECT_DIR$/database/seeds/AdminsTableSeeder.php" />
+        <option value="$PROJECT_DIR$/app/Services/SubcategoriesService.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/Admin/SubcategoriesController.php" />
       </list>
     </option>
   </component>
@@ -214,8 +307,7 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="251" />
-    <option name="y" value="121" />
+    <option name="x" value="226" />
     <option name="width" value="1198" />
     <option name="height" value="653" />
   </component>
@@ -270,17 +362,12 @@
               <item name="laravel-api-core" type="b2602c69:ProjectViewProjectNode" />
               <item name="laravel-api-core" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="Api" type="462c0819:PsiDirectoryNode" />
-              <item name="Admin" type="462c0819:PsiDirectoryNode" />
-              <item name="Base" type="462c0819:PsiDirectoryNode" />
+              <item name="Services" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="laravel-api-core" type="b2602c69:ProjectViewProjectNode" />
               <item name="laravel-api-core" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Services" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="laravel-api-core" type="b2602c69:ProjectViewProjectNode" />
@@ -350,12 +437,12 @@
       <workItem from="1569196518856" duration="8000" />
       <workItem from="1569282109657" duration="2854000" />
       <workItem from="1569538226560" duration="2385000" />
-      <workItem from="1569862619098" duration="8763000" />
+      <workItem from="1569862619098" duration="13481000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14420000" />
+    <option name="totallyTimeSpent" value="19138000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="0" width="1608" height="870" extended-state="6" />
@@ -436,16 +523,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/SectionsService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
-          <folding>
-            <element signature="e#34#58#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/AuthController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -462,16 +539,6 @@
           <caret line="100" column="5" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="100" selection-end-column="5" />
           <folding>
             <element signature="e#34#48#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/SubcategoriesService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-120">
-          <caret line="29" column="30" lean-forward="true" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
-          <folding>
-            <element signature="e#34#63#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -507,13 +574,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/AnalyticsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/SectionsController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="235">
@@ -531,34 +591,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/SubcategoriesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
-          <caret line="11" column="10" lean-forward="true" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+          <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/SlidersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="132" column="70" selection-start-line="132" selection-start-column="70" selection-end-line="132" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/storage/app/analytics/service-account-credentials.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Services/SlidersService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="61" selection-start-line="61" selection-end-line="74" selection-end-column="5" />
+        <state relative-caret-position="141">
+          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
           <folding>
             <element signature="e#32#71#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/ProductsService.php">
+    <entry file="file://$PROJECT_DIR$/app/Services/SectionsService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="75" column="5" lean-forward="true" selection-start-line="75" selection-start-column="5" selection-end-line="75" selection-end-column="5" />
+        <state relative-caret-position="182">
+          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
           <folding>
             <element signature="e#34#58#0#PHP" expanded="true" />
           </folding>
@@ -567,18 +630,52 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/ProductsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="662">
-          <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
+        <state relative-caret-position="332">
+          <caret line="36" column="67" selection-start-line="36" selection-start-column="67" selection-end-line="36" selection-end-column="67" />
           <folding>
             <element signature="e#50#83#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/SlidersController.php">
+    <entry file="file://$PROJECT_DIR$/app/Services/ProductsService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="132" column="70" selection-start-line="132" selection-start-column="70" selection-end-line="132" selection-end-column="70" />
+        <state relative-caret-position="125">
+          <caret line="159" column="45" lean-forward="true" selection-start-line="159" selection-start-column="45" selection-end-line="159" selection-end-column="45" />
+          <folding>
+            <element signature="e#34#58#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/AdminsTableSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Services/SubcategoriesService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="54" column="5" lean-forward="true" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
+          <folding>
+            <element signature="e#34#63#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/AnalyticsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="25" column="15" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/Admin/SubcategoriesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
         </state>
       </provider>
     </entry>
