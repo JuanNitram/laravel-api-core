@@ -69,6 +69,25 @@ class ProductsService
     }
 
     /**
+     * @param int $id
+     * @return array
+     */
+    public function removeMedia(int $id): array
+    {
+        if($result = $this->mediasService->removeMedia($id)){
+            return [
+                'success' => true,
+                'message' => 'Media removed successfully.'
+            ];
+        };
+
+        return [
+            'success' => false,
+            'message' => 'Slider not found.'
+        ];
+    }
+
+    /**
      * @param array $data
      * @return array
      */

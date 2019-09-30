@@ -50,6 +50,24 @@ class ProductsController extends BaseController
         return $this->sendResponse([], 'A problem was ocurred.', false);
     }
 
+    public function removeMedia(Request $request)
+    {
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'media_id' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), 200);
+        }
+
+        if($result = $this->service->removeMedia($request->media_id)){
+            return $this->sendResponse([], $result['message']);
+        }
+
+        return $this->sendResponse([], $result['message']);
+    }
+
     public function save(Request $request)
     {
         $data = $request->all();

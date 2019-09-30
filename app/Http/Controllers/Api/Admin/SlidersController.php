@@ -14,25 +14,25 @@ class SlidersController extends BaseController
     /**
      * @var SlidersService
      */
-    private $slidersService;
+    private $service;
 
     /**
      * SlidersController constructor.
-     * @param SlidersService $slidersService
+     * @param SlidersService $service
      */
-    public function __construct(SlidersService $slidersService)
+    public function __construct(SlidersService $service)
     {
-        $this->slidersService = $slidersService;
+        $this->service = $service;
     }
 
     public function sliders()
     {
-        return $this->sendResponse(['sliders' => $this->slidersService->all()], 'Sliders');
+        return $this->sendResponse(['sliders' => $this->service->all()], 'Sliders');
     }
 
     public function search(int $id)
     {
-        if($slider = $this->slidersService->get($id)){
+        if($slider = $this->service->get($id)){
             return $this->sendResponse(['slider' => $slider], 'Slider founded successfully.');
         }
 
@@ -41,7 +41,7 @@ class SlidersController extends BaseController
 
     public function remove(int $id)
     {
-        if($removed = $this->slidersService->remove($id)){
+        if($removed = $this->service->remove($id)){
             return $this->sendResponse([], 'Slider deleted successfully.');
         }
 
@@ -58,7 +58,7 @@ class SlidersController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors(), 200);
         }
 
-        if($result = $this->slidersService->removeMedia($request->media_id)){
+        if($result = $this->service->removeMedia($request->media_id)){
             return $this->sendResponse([], $result['message']);
         }
 
@@ -77,7 +77,7 @@ class SlidersController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors(), 200);
         }
 
-        $result = $this->slidersService->save($request->all());
+        $result = $this->service->save($request->all());
         if($result['success'] === true){
             return $this->sendResponse($result['data'], $result['message']);
         }
@@ -97,7 +97,7 @@ class SlidersController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors(), 200);
         }
 
-        $result = $this->slidersService->update($id, $data);
+        $result = $this->service->update($id, $data);
         if($result['success'] === true){
             return $this->sendResponse($result['data'], $result['message']);
         }
@@ -108,7 +108,7 @@ class SlidersController extends BaseController
     public function saveOrder(Request $request){
         $items = $request->items;
 
-        if($result = $this->slidersService->saveOrder($items)){
+        if($result = $this->service->saveOrder($items)){
             return $this->sendResponse($result['data'], $result['message']);
         };
 
@@ -119,7 +119,7 @@ class SlidersController extends BaseController
         $items = $request->items;
         $active = $request->active;
 
-        if($result = $this->slidersService->activeMany($items, $active)){
+        if($result = $this->service->activeMany($items, $active)){
             return $this->sendResponse($result['data'], $result['message']);
         };
 
@@ -129,7 +129,7 @@ class SlidersController extends BaseController
     public function removeMany(Request $request){
         $items = $request->items;
 
-        if($result = $this->slidersService->removeMany($items)){
+        if($result = $this->service->removeMany($items)){
             return $this->sendResponse($result['data'], $result['message']);
         };
 
