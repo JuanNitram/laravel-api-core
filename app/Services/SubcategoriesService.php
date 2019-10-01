@@ -5,16 +5,11 @@ namespace App\Services;
 
 
 use App\Models\Subcategories;
-use Illuminate\Database\Eloquent\Model;
+use App\Services\Base\BaseService;
 use Illuminate\Support\Collection;
 
-class SubcategoriesService
+class SubcategoriesService extends BaseService
 {
-    /**
-     * @var Subcategories
-     */
-    private $model;
-
     /**
      * @var CategoriesService
      */
@@ -27,44 +22,17 @@ class SubcategoriesService
      */
     public function __construct(Subcategories $model, CategoriesService $categoriesService)
     {
-        $this->model = $model;
+        parent::__construct($model);
         $this->categoriesService = $categoriesService;
     }
 
     /**
-     * @param array $relations
+     * @param int $id
      * @return Collection
      */
-    public function all(array $relations = []): Collection
-    {
-        return $this->model->with($relations)->get();
-    }
-
-    /**
-     * @return Subcategories
-     * @var int $id
-     */
-    public function get(int $id): Subcategories
-    {
-        return $this->model->where('id', $id)->first();
-    }
-
     public function getByCategory(int $id): Collection
     {
         return $this->model->where('categories_id', $id)->get();
-    }
-
-    /**
-     * @return bool
-     * @var int $id
-     */
-    public function remove(int $id): bool
-    {
-        if($subcategory = $this->model->where('id', $id)->first()){
-            return $subcategory->delete();
-        }
-
-        return false;
     }
 
     /**

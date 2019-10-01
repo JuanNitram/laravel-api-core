@@ -6,21 +6,14 @@ namespace App\Services;
 use App\Models\Media;
 use Illuminate\Database\Eloquent\Model;
 use PHPUnit\Exception;
-use Plank\Mediable\MediaUploader;
+use MediaUploader;
 
 class MediasService
 {
-    private $mediaUploader;
-
-    public function __construct(MediaUploader $mediaUploader)
-    {
-        $this->mediaUploader = $mediaUploader;
-    }
-
     /**
-     * @param Model $model
-     * @param array $medias
-     * @param string|null $group
+     * @param Model  $model
+     * @param array  $medias
+     * @param string $group
      */
     public function storeMedias(Model $model, array $medias, string $group = null): void
     {
@@ -31,7 +24,7 @@ class MediasService
             if ($media_type == 'image') {
                 $media_filename = pathinfo($media->getClientOriginalName(), PATHINFO_FILENAME);
 
-                $m_original_media = $this->mediaUploader->fromSource($media)->toDestination('public', $preferences['images_folder'])
+                $m_original_media = MediaUploader::fromSource($media)->toDestination('public', $preferences['images_folder'])
                                                  ->useFilename($media_filename . '-original')->upload();
 
                 if ($group)
@@ -41,7 +34,7 @@ class MediasService
 
                 foreach ($preferences['sizes'] as $key => $dimension) {
                     $resized_media = \Image::make($media)->resize($dimension[0], $dimension[1])->encode('jpg', $preferences['quality']);
-                    $m_resized_media = $this->mediaUploader->fromString($resized_media)->toDestination('public', $preferences['images_folder'])
+                    $m_resized_media = MediaUploader::fromString($resized_media)->toDestination('public', $preferences['images_folder'])
                                                     ->useFilename($media_filename . '-' . $key)->upload();
 
                     if ($group)

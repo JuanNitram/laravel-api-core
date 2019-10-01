@@ -31,7 +31,7 @@ Route::prefix('admin')->group(function(){
 
             Route::post($s . '/remove-media', 'Api\Admin\\' . ucfirst($s).'Controller@removeMedia');
             Route::post($s . '/save-order', 'Api\Admin\\' . ucfirst($s).'Controller@saveOrder');
-            Route::post($s . '/active-many', 'Api\Admin\\' . ucfirst($s).'Controller@activeMany');
+            Route::post($s . '/active-many', 'Api\Admin\\' . ucfirst($s).'Controller@toggleMany');
             Route::post($s . '/remove-many', 'Api\Admin\\' . ucfirst($s).'Controller@removeMany');
         }
         Route::prefix('analytics')->group(function(){

@@ -2,76 +2,19 @@
 
 namespace App\Services;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
+use App\Services\Base\BaseService;
 use phpDocumentor\Reflection\Types\Boolean;
 use App\Models\Sliders;
 
-class SlidersService
+class SlidersService extends BaseService
 {
     /**
-     * @var MediasService $mediasService
-     */
-    private $mediasService;
-
-    /**
      * SlidersService constructor.
-     * @param MediasService $mediasService
+     * @param Sliders       $model
      */
-    public function __construct(MediasService $mediasService)
+    public function __construct(Sliders $model)
     {
-        $this->mediasService = $mediasService;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function all(): Collection
-    {
-        return Sliders::orderBy('pos', 'asc')->get();
-    }
-
-    /**
-     * @param int $id
-     * @return Model
-     */
-    public function get(int $id): ?Model
-    {
-        return Sliders::where('id', $id)->first();
-    }
-
-    /**
-     * @param int $id
-     * @return bool
-     */
-    public function remove(int $id): Boolean
-    {
-        if($slider = Sliders::where('id', $id)->first()){
-            foreach($slider->media as $media)
-                $media->delete();
-            return $slider->delete();
-        }
-
-        return false;
-    }
-
-    /**
-     * @param int $id
-     * @return array
-     */
-    public function removeMedia(int $id): array
-    {
-        if($result = $this->mediasService->removeMedia($id)){
-            return [
-                'success' => true,
-                'message' => 'Media removed successfully.'
-            ];
-        };
-
-        return [
-            'success' => false,
-            'message' => 'Slider not found.'
-        ];
+        parent::__construct($model);
     }
 
     /**
@@ -80,7 +23,7 @@ class SlidersService
      */
     public function save(array $data = []): array
     {
-        $slider = Sliders::create($data);
+        $slider = $this->model->create($data);
 
         if(isset($data['medias']) === true){
             $this->mediasService->storeMedias($slider, $data['medias']);
@@ -104,7 +47,7 @@ class SlidersService
      */
     public function update(int $id, array $data = []): array
     {
-        if($slider = Sliders::where('id', $id)->first()){
+        if($slider = $this->model->where('id', $id)->first()){
             $slider->update($data);
 
             if(isset($data['medias'])){
@@ -125,57 +68,6 @@ class SlidersService
         return [
             'success' => false,
             'message' => 'Slider not found.'
-        ];
-    }
-
-    public function saveOrder(array $items): array
-    {
-        $index = 0;
-
-        foreach($items as $id){
-            $item = Sliders::where('id', $id)->first();
-            $item->update([
-                'pos' => $index,
-            ]);
-            $index++;
-        }
-
-        return [
-            'success' => true,
-            'message' => 'Sliders order saved succesfully.',
-        ];
-    }
-
-    public function activeMany(array $items, Boolean $active): array
-    {
-        foreach($items as $id){
-            $item = Sliders::where('id', $id)->first();
-            if($item){
-                $item->update([
-                    'active' => $active,
-                ]);
-            }
-        }
-
-        return [
-            'success' => true,
-            'message' => 'Sliders activated succesfully.',
-        ];
-    }
-
-    public function removeMany(array $items): array
-    {
-        foreach($items as $id){
-            if($item = Sliders::where('id', $id)->first()){
-                foreach($item->media as $media)
-                    $media->delete();
-                $item->delete();
-            }
-        }
-
-        return [
-            'success' => true,
-            'message' => 'Sliders removed succesfully.',
         ];
     }
 }
