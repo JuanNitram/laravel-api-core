@@ -27,12 +27,12 @@ class AdminsController extends BaseController
 
     public function admins()
     {
-        return $this->sendResponse(['admins' => $this->adminsService->all()], 'Admins');
+        return $this->sendResponse(['admins' => $this->adminsService->all(['sections'])], 'Admins');
     }
 
     public function search(int $id)
     {
-        if($admin = $this->adminsService->get($id)){
+        if($admin = $this->adminsService->get($id, ['sections'])){
             return $this->sendResponse(['admin' => $admin], 'Admin founded successfully.');
         }
 

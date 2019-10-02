@@ -36,7 +36,7 @@ class BaseService
      */
     public function all(array $relations = []): Collection
     {
-        return $this->model->with($relations)->get();
+        return $this->model->with($relations)->orderBy('pos', 'asc')->get();
     }
 
     /**

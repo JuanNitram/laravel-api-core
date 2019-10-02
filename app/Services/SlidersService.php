@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Services\Base\BaseService;
-use phpDocumentor\Reflection\Types\Boolean;
 use App\Models\Sliders;
 
 class SlidersService extends BaseService

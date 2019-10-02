@@ -5,88 +5,24 @@ namespace App\Services;
 
 
 use App\Models\Products;
-use Illuminate\Support\Collection;
+use App\Services\Base\BaseService;
 
-class ProductsService
+class ProductsService extends BaseService
 {
-    /**
-     * @var Products
-     */
-    private $model;
-
     /**
      * @var CategoriesService
      */
     private $categoriesService;
 
     /**
-     * @var MediasService
-     */
-    private $mediasService;
-
-    /**
      * ProductsService constructor.
      * @param Products          $model
      * @param CategoriesService $categoriesService
      */
-    public function __construct(Products $model, CategoriesService $categoriesService, MediasService $mediasService)
+    public function __construct(Products $model, CategoriesService $categoriesService)
     {
-        $this->model = $model;
+        parent::__construct($model);
         $this->categoriesService = $categoriesService;
-        $this->mediasService = $mediasService;
-    }
-
-    /**
-     * @param array $relations
-     * @return Collection
-     */
-    public function all(array $relations = []): Collection
-    {
-        return $this->model->with($relations)->orderBy('pos', 'asc')->get();
-    }
-
-    /**
-     * @param array $relations
-     * @return Products
-     * @var int     $id
-     */
-    public function get(int $id, array $relations = []): Products
-    {
-        return $this->model->with($relations)->where('id', $id)->first();
-    }
-
-    /**
-     * @var int $id
-     * @return bool
-     */
-    public function remove(int $id): bool
-    {
-        if($product = $this->model->where('id', $id)->first()){
-            foreach($product->media as $media)
-                $media->delete();
-            return $product->delete();
-        }
-
-        return false;
-    }
-
-    /**
-     * @param int $id
-     * @return array
-     */
-    public function removeMedia(int $id): array
-    {
-        if($result = $this->mediasService->removeMedia($id)){
-            return [
-                'success' => true,
-                'message' => 'Media removed successfully.'
-            ];
-        };
-
-        return [
-            'success' => false,
-            'message' => 'Slider not found.'
-        ];
     }
 
     /**

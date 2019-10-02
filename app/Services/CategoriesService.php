@@ -1,59 +1,21 @@
 <?php
 
-
 namespace App\Services;
 
-
-use App\Admin;
 use App\Models\Categories;
-use App\Models\Sliders;
+use App\Services\Base\BaseService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-class CategoriesService
+class CategoriesService extends BaseService
 {
-    /**
-     * @var Categories
-     */
-    private $model;
-
     /**
      * CategoriesService constructor.
      * @param Categories $model
      */
     public function __construct(Categories $model)
     {
-        $this->model = $model;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function all(): Collection
-    {
-        return $this->model->all();
-    }
-
-    /**
-     * @var int $id
-     * @return Model
-     */
-    public function get(int $id): ?Model
-    {
-        return $this->model->where('id', $id)->first();
-    }
-
-    /**
-     * @var int $id
-     * @return bool
-     */
-    public function remove(int $id): bool
-    {
-        if($category = $this->model->where('id', $id)->first()){
-            return $category->delete();
-        }
-
-        return false;
+        parent::__construct($model);
     }
 
     /**

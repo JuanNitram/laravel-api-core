@@ -1,56 +1,19 @@
 <?php
 
-
 namespace App\Services;
 
-
 use App\Models\Sections;
-use Illuminate\Support\Collection;
+use App\Services\Base\BaseService;
 
-class SectionsService
+class SectionsService extends BaseService
 {
-    /**
-     * @var Sections
-     */
-    private $model;
-
     /**
      * SectionsService constructor.
      * @var Sections       $model
      */
     public function __construct(Sections $model)
     {
-        $this->model = $model;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function all(): Collection
-    {
-        return $this->model->all();
-    }
-
-    /**
-     * @return Sections
-     * @var int $id
-     */
-    public function get(int $id): Sections
-    {
-        return $this->model->where('id', $id)->first();
-    }
-
-    /**
-     * @return bool
-     * @var int $id
-     */
-    public function remove(int $id): bool
-    {
-        if($section = $this->model->where('id', $id)->first()){
-            return $section->delete();
-        }
-
-        return false;
+        parent::__construct($model);
     }
 
     /**

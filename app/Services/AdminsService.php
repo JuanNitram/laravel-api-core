@@ -5,18 +5,14 @@ namespace App\Services;
 use App\Admin;
 use App\Models\AdminsTypes;
 use App\Models\Sections;
+use App\Services\Base\BaseService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use phpDocumentor\Reflection\Types\Boolean;
 
-class AdminsService {
-
-    /**
-     * @var Admin
-     */
-    private $model;
-
+class AdminsService extends BaseService
+{
     /**
      * @var AdminsTypes
      */
@@ -29,28 +25,15 @@ class AdminsService {
 
     public function __construct(Admin $model, AdminsTypes $adminsTypes, SectionsService $sectionsService)
     {
-        $this->model = $model;
+        parent::__construct($model);
         $this->adminsTypes = $adminsTypes;
         $this->sectionsService = $sectionsService;
     }
 
     /**
-     * @return Collection
-     */
-    public function all(): Collection
-    {
-        return $this->model->with('sections')->get();
-    }
-
-    /**
-     * @param int $id
+     * @param string $email
      * @return Admin
      */
-    public function get(int $id): Admin
-    {
-        return $this->model->where('id', $id)->with('sections')->first();
-    }
-
     public function getByEmail(string $email): Admin
     {
         return $this->model->where('email', $email)->with('sections')->first();
@@ -63,19 +46,6 @@ class AdminsService {
     public function getAdminSections(Admin $admin): Collection
     {
         return $admin->sections;
-    }
-
-    /**
-     * @param int $id
-     * @return bool
-     */
-    public function remove(int $id): Boolean
-    {
-        if($admin = $this->model->where('id', $id)->first()){
-            return $admin->delete();
-        }
-
-        return false;
     }
 
     /**
