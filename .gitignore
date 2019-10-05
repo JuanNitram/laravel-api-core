@@ -1,6 +1,7 @@
 vendor/
 node_modules/
 npm-debug.log
+.idea/
 
 # Laravel 4 specific
 bootstrap/compiled.php
@@ -10,6 +11,9 @@ app/storage/
 public/storage
 public/hot
 storage/*.key
+storage/app/public/images
+storage/app/public/others
+storage/app/public/videos
 .env.*.php
 .env.php
 .env
