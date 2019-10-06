@@ -24,7 +24,7 @@ class ContactController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors(), 200);
         }
 
-        Mail::to('info@sideraldev.com')->send(new ContactForm($request->all()));
+        Mail::to('support@juanvargasdev.com')->send(new ContactForm($request->all()));
 
         return $this->sendResponse([], 'Mail sended successfully.');
     }
