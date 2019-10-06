@@ -29,7 +29,7 @@ class ContactForm extends Mailable
      */
     public function build()
     {
-        return $this->from('soporte@sideraldev.com')
+        return $this->from('support@juanvargasdev.com')
             ->subject('Nuevo mensaje recibido!')
             ->with(['data' => $this->data])
             ->markdown('mails.contactForm');
