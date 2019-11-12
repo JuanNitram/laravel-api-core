@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Services\ProductsService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Admin\Base\BaseController as BaseController;
 use App\Models\Products;
@@ -27,9 +28,18 @@ class ProductsController extends BaseController
         $this->service = $service;
     }
 
-    public function products()
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function products(Request $request): JsonResponse
     {
-        return $this->sendResponse(['products' => $this->service->all()], 'Products');
+        $relations = $request->input('relations') ?? [];
+        $conditions = $request->input('conditions') ?? [];
+        $page = $request->input('page') ?? 1;
+        $perPage = $request->input('per_page') ?? 10;
+
+        return $this->sendResponse(['products' => $this->service->paginated($page, $perPage, $relations, $conditions)], 'Products');
     }
 
     public function search($id)

@@ -5,6 +5,7 @@ namespace App\Services\Base;
 
 
 use App\Services\MediasService;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
@@ -37,6 +38,20 @@ class BaseService
     public function all(array $relations = []): Collection
     {
         return $this->model->with($relations)->orderBy('pos', 'asc')->get();
+    }
+
+    /**
+     * @param int   $page
+     * @param int   $perPage
+     * @param array $relations
+     * @param array $conditions
+     * @return LengthAwarePaginator
+     */
+    public function paginated(int $page = 1, int $perPage = 10, array $relations = [], array $conditions = []): LengthAwarePaginator
+    {
+        return $this->model->where($conditions)
+                           ->with($relations)
+                           ->paginate($perPage, ['*'], 'page', $page);
     }
 
     /**
