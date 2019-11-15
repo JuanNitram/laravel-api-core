@@ -15,7 +15,7 @@ class AdminsTableSeeder extends Seeder
         DB::table('admins')->insert([
            [
             'name' => 'Support',
-            'email' => 'support@juandev.com',
+            'email' => 'support@juanvargasdev.com',
             'password' => '$2y$10$HK3oTqZJ8Uot.v7mHViA.OwBNuAFYwgw4/0pfEkmvUFlM7q38fZMy', //elbergalarga xD
             'types_id' => 1,
             'active' => 1,

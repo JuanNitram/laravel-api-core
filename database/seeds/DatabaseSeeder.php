@@ -17,6 +17,10 @@ class DatabaseSeeder extends Seeder
             SectionsTableSeeder::class,
             AdminsSectionsTableSeeder::class,
             UsersTypesTableSeeder::class,
+
+            CategoriesTableSeeder::class,
+            SubcategoriesTableSeeder::class,
+            ProductsTableSeeder::class,
         ]);
     }
 }
